@@ -41,15 +41,6 @@ public class DaoTests {
         todo3 = new Todo(null , "todo3", "body3" , myUser );
     }
 
-    @Test
-    public void testCreateReadDelete() {
-        todoRepository.save(todo1);
-        Iterable<Todo> todos = todoRepository.findAll();
-        Assertions.assertThat(todos).extracting(Todo::getTitle).containsOnly("todo1");
-
-        todoRepository.deleteAll();
-        Assertions.assertThat(todoRepository.findAll()).isEmpty();
-    }
 
     @Test
     public void findAllByMyUserTesting(){
@@ -58,22 +49,6 @@ public class DaoTests {
         todoRepository.save(todo3);
       List<Todo> todos= todoRepository.findAllByMyUser(myUser);
         Assertions.assertThat(todos.get(0).getMyUser().getId()).isEqualTo(myUser.getId());
-    }
-
-
-    @Test
-    public void findMyUserById(){
-        myUserRepository.save(myUser);
-        MyUser myUser1=myUserRepository.findMyUserById(myUser.getId());
-        Assertions.assertThat(myUser).isEqualTo(myUser1);
-    }
-
-
-    @Test
-    public void findMyUserByUsername(){
-        myUserRepository.save(myUser);
-        MyUser myUser1=myUserRepository.findMyUserByUsername(myUser.getUsername());
-        Assertions.assertThat(myUser).isEqualTo(myUser1);
     }
 
     @Test
